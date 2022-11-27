@@ -3,6 +3,7 @@ import warnings
 warnings.filterwarnings('ignore')
 class Faizan:
     def faizan_two_machine(self, df):
+        c1 = df.copy()
         df.rename(columns={df.columns[0]: 'Job', df.columns[1]: 'Time_machine1', df.columns[2]: 'Time_machine2'},
                   inplace=True)
         l1 = []  # list for machine 1
@@ -17,11 +18,12 @@ class Faizan:
             if x in t2:
                 ind = t2.index(x)
                 letter2.append(list(df[df["Time_machine2"] == x]['Job'])[0])
+                df = df[df['Job'] !=list(df[df["Time_machine2"] == x]['Job'])[0]]
                 l2.append(x)
             elif x in t1:
                 ind = t1.index(x)
                 letter1.append(list(df[df["Time_machine1"] == x]['Job'])[0])
-                # print(ind)
+                df = df[df['Job'] != list(df[df["Time_machine1"] == x]['Job'])[0]]
                 l1.append(x)
             t1.pop(ind)
             t2.pop(ind)
@@ -31,7 +33,7 @@ class Faizan:
         l2.reverse()
         print(f"Sequence : {letter1 + letter2}")
         letter_final = letter1 + letter2
-
+        df = c1
         # For machine 1 execution
         class create_dict(dict):
             def __init__(self):
