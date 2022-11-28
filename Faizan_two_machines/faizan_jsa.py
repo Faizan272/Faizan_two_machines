@@ -82,8 +82,8 @@ class Faizan:
                         df_new_order['Start_time_Machine2'][i] - df_new_order["End_Time_Machine2"][i - 1])
         total_idle_time_machine2 += df_new_order['Start_time_Machine2'][
             0]  # first iteration when machine 1 executes, machine 2 is idle
-        total_idle_time_machine1 = df_new_order['End_Time_Machine2'][len(df_new_order) - 1] - \
-                                   df_new_order['Start_time_Machine2'][len(df_new_order) - 1]
+        total_idle_time_machine1 = (df_new_order['End_Time_Machine2'][len(df_new_order) - 1] -
+                                   df_new_order['Start_time_Machine2'][len(df_new_order) - 1]) + df_new_order['Start_time_Machine2'][len(df_new_order) - 1] - df_new_order['End_Time_Machine1'][len(df_new_order) - 1]
         Total__Execution_Time = df_new_order['End_Time_Machine2'][len(df_new_order) - 1]
         print(f"Total_Execution_Time is : {Total__Execution_Time}")
         print(f"Total_Idle_Time for machine 1 is : {total_idle_time_machine1}")
